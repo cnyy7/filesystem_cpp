@@ -1,7 +1,7 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
@@ -10,39 +10,39 @@ on 6 June.
 
 command cmd[CMD_NUM];
 
-/*°ïÖú*/
+/*å¸®åŠ©*/
 void help(){
-	printf("\n\n³õÊ¼»¯                        format\n");
-	printf("²é¿´µ±Ç°Ä¿Â¼ÏÂÎÄ¼şÁĞ±í        dir\n");
-	printf("²é¿´ÎÄ¼şĞÅÏ¢                  cat        (cat + ÎÄ¼şÃû)  \n");
-	printf("²é¿´ÏµÍ³¿Õ¼äÊ¹ÓÃĞÅÏ¢          ls    \n");
-	printf("´´½¨Ä¿Â¼                      md         (md  + Ä¿Â¼Ãû)  \n");
-	printf("´´½¨ÎÄ¼ş                      touch      (touch  + ÎÄ¼şÃû + ÎÄ¼ş³¤¶È + È¨ÏŞ)\n");
-	printf("É¾³ıÎÄ¼ş                      del        (del + ÎÄ¼şÃû) \n");
-	printf("´ò¿ªÎÄ¼ş                      open       (open + ÎÄ¼şÃû) \n");
-	printf("µ¼³öÎÄ¼ş                      export     (export + ÎÄ¼şÃû + Òªµ¼³öµÄµØÖ·) \n");
-	printf("¸ü¸ÄÎÄ¼şÃû×Ö                  rename     (rename + ÎÄ¼şÃû + ĞÂÎÄ¼şÃû) \n");
-	printf("µ¼ÈëÎÄ¼ş                      import     (import + Òªµ¼ÈëµÄÎÄ¼ş) \n");
-	printf("´ò¿ªÎÄ¼ş                      open       (open + ÎÄ¼şÃû) \n");
-	printf("¹Ø±ÕÎÄ¼ş                      close      (close + ÎÄ¼şÃû) \n");
-	printf("¶ÁÈ¡ÎÄ¼ş                      read       (read + ÎÄ¼şÃû) \n");
-	printf("Ğ´ÈëÎÄ¼ş                      write      (write + ÎÄ¼şÃû + Ğ´Èë·½Ê½(0:¸²¸Ç£¬´óÓÚ1£º×·¼Ó))\n");
-	printf("¸´ÖÆÎÄ¼ş                      copy       (copy + ÎÄ¼şÃû£©  \n");
-	printf("ÒÆ¶¯ÎÄ¼ş                      move       (move + ÎÄ¼şÃû£©  \n");
-	printf("Õ³ÌùÎÄ¼ş                      paste      (paste + ÎÄ¼şÃû)  \n");
-	printf("É¾³ıÄ¿Â¼                      rd         (rd + Ä¿Â¼Ãû)\n");
-	printf("¸ü¸ÄÎÄ¼şÈ¨ÏŞ                  attrib     (attrib + Ä¿Â¼Ãû+È¨ÏŞ£¨r,o,w£©)\n");
-	printf("½øÈëµ±Ç°Ä¿Â¼ÏÂµÄÖ¸¶¨Ä¿Â¼      cd         (cd + Ä¿Â¼Ãû)\n");
-	printf("·µ»ØÉÏÒ»¼¶Ä¿Â¼                cd..  \n");
-	printf("ÏÔÊ¾Ê±¼ä                      time  \n");
-	printf("ÏÔÊ¾ÏµÍ³ĞÅÏ¢                  ver  \n");
-	printf("ÏÔÊ¾°ïÖúÃüÁî                  help  \n");
-	printf("ÍË³öÎÄ¼şÏµÍ³                  exit  \n");
-	printf("ÍË³öµÇÂ¼                      logout\n");
+	printf("\n\nåˆå§‹åŒ–                        format\n");
+	printf("æŸ¥çœ‹å½“å‰ç›®å½•ä¸‹æ–‡ä»¶åˆ—è¡¨           dir\n");
+	printf("æŸ¥çœ‹æ–‡ä»¶ä¿¡æ¯                   cat        (cat + æ–‡ä»¶å)  \n");
+	printf("æŸ¥çœ‹ç³»ç»Ÿç©ºé—´ä½¿ç”¨ä¿¡æ¯            ls    \n");
+	printf("åˆ›å»ºç›®å½•                      md         (md  + ç›®å½•å)  \n");
+	printf("åˆ›å»ºæ–‡ä»¶                      touch      (touch  + æ–‡ä»¶å + æ–‡ä»¶é•¿åº¦ + æƒé™)\n");
+	printf("åˆ é™¤æ–‡ä»¶                      del        (del + æ–‡ä»¶å) \n");
+	printf("æ‰“å¼€æ–‡ä»¶                      open       (open + æ–‡ä»¶å) \n");
+	printf("å¯¼å‡ºæ–‡ä»¶                      export     (export + æ–‡ä»¶å + è¦å¯¼å‡ºçš„åœ°å€) \n");
+	printf("æ›´æ”¹æ–‡ä»¶åå­—                   rename     (rename + æ–‡ä»¶å + æ–°æ–‡ä»¶å) \n");
+	printf("å¯¼å…¥æ–‡ä»¶                      import     (import + è¦å¯¼å…¥çš„æ–‡ä»¶) \n");
+	printf("æ‰“å¼€æ–‡ä»¶                      open       (open + æ–‡ä»¶å) \n");
+	printf("å…³é—­æ–‡ä»¶                      close      (close + æ–‡ä»¶å) \n");
+	printf("è¯»å–æ–‡ä»¶                      read       (read + æ–‡ä»¶å) \n");
+	printf("å†™å…¥æ–‡ä»¶                      write      (write + æ–‡ä»¶å + å†™å…¥æ–¹å¼(0:è¦†ç›–ï¼Œå¤§äº1ï¼šè¿½åŠ ))\n");
+	printf("å¤åˆ¶æ–‡ä»¶                      copy       (copy + æ–‡ä»¶åï¼‰  \n");
+	printf("ç§»åŠ¨æ–‡ä»¶                      move       (move + æ–‡ä»¶åï¼‰  \n");
+	printf("ç²˜è´´æ–‡ä»¶                      paste      (paste + æ–‡ä»¶å)  \n");
+	printf("åˆ é™¤ç›®å½•                      rd         (rd + ç›®å½•å)\n");
+	printf("æ›´æ”¹æ–‡ä»¶æƒé™                   attrib     (attrib + ç›®å½•å+æƒé™ï¼ˆr,o,wï¼‰)\n");
+	printf("è¿›å…¥å½“å‰ç›®å½•ä¸‹çš„æŒ‡å®šç›®å½•         cd         (cd + ç›®å½•å)\n");
+	printf("è¿”å›ä¸Šä¸€çº§ç›®å½•                cd..  \n");
+	printf("æ˜¾ç¤ºæ—¶é—´                      time  \n");
+	printf("æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯                  ver  \n");
+	printf("æ˜¾ç¤ºå¸®åŠ©å‘½ä»¤                  help  \n");
+	printf("é€€å‡ºæ–‡ä»¶ç³»ç»Ÿ                  exit  \n");
+	printf("é€€å‡ºç™»å½•                      logout\n");
 	
 }
 
-/*³õÊ¼»¯ÃüÁî*/
+/*åˆå§‹åŒ–å‘½ä»¤*/
 void init_cmd(command* cmd)
 {
 	strcpy(cmd[0].com, "attrib");
@@ -55,7 +55,7 @@ void init_cmd(command* cmd)
 	strcpy(cmd[7].com, "dir");
 	strcpy(cmd[8].com, "exit");
 	strcpy(cmd[9].com, "export");
-	strcpy(cmd[10].com, "find");          //Î´ÊµÏÖ
+	strcpy(cmd[10].com, "find");          //æœªå®ç°
 	strcpy(cmd[11].com, "format");
 	strcpy(cmd[12].com, "help");
 	strcpy(cmd[13].com, "import");
@@ -76,7 +76,7 @@ void init_cmd(command* cmd)
 	//strcpy(cmd[27].com, "xcopy");
 }
 
-/*¶ş·Ö²éÕÒ·µ»ØÃüÁîÏÂ±ê*/
+/*äºŒåˆ†æŸ¥æ‰¾è¿”å›å‘½ä»¤ä¸‹æ ‡*/
 int find_cmd(string temp_cmd,int low,int high,command* com)
 {
 	int mid = (low + high) / 2;
@@ -91,32 +91,32 @@ int find_cmd(string temp_cmd,int low,int high,command* com)
 		return find_cmd(temp_cmd, mid+1, high, com);
 }
 
-/*Ö÷º¯Êı*/
+/*ä¸»å‡½æ•°*/
 int main()
 {
 	char tmp[20],  tmp1[20];
 	struct command tmp2[10];
 	int i, j = 0, p, len = 0;
 	FILE *fp;
-	//½«¸÷¸öÃüÁî´æ½øÃüÁî±í
+	//å°†å„ä¸ªå‘½ä»¤å­˜è¿›å‘½ä»¤è¡¨
 	init_cmd(cmd);
-	//³õÊ¼»¯
-	if ((fp = fopen("filesave", "rb")) == NULL)   //ÅĞ¶ÏÏµÍ³ÎÄ¼şÊÇ·ñ´æÔÚ
+	//åˆå§‹åŒ–
+	if ((fp = fopen("filesave", "rb")) == NULL)   //åˆ¤æ–­ç³»ç»Ÿæ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	{
-		cout << "ÕıÔÚ³õÊ¼»¯ÏµÍ³" << endl;
+		cout << "æ­£åœ¨åˆå§‹åŒ–ç³»ç»Ÿ" << endl;
 		format();
 	}
 	else
 	{
-		cout << "¼ÓÔØÎÄ¼şÏµÍ³" << endl;
-		read_file(fp);       //¶ÁÈ¡ÏµÍ³ÎÄ¼şµÄÄÚÈİ
+		cout << "åŠ è½½æ–‡ä»¶ç³»ç»Ÿ" << endl;
+		read_file(fp);       //è¯»å–ç³»ç»Ÿæ–‡ä»¶çš„å†…å®¹
 	}
 
-	//×¢²áµÇÂ½
+	//æ³¨å†Œç™»é™†
 	while (1) {
 		int log_com;
-		cout << "1------µÇÂ½------1" << endl;
-		cout << "2------×¢²á------2" << endl;
+		cout << "1------ç™»é™†------1" << endl;
+		cout << "2------æ³¨å†Œ------2" << endl;
 		cin >> log_com;
 		switch (log_com) 
 		{
@@ -131,7 +131,7 @@ int main()
 	help();
 	while (1)
 	{
-		j = 0;         //±ØĞëÖØĞÂ¸ø»Ö¸´0·ñÔò³ö´í
+		j = 0;         //å¿…é¡»é‡æ–°ç»™æ¢å¤0å¦åˆ™å‡ºé”™
 		strcpy(tmp, cur_dir);
 		while (strcmp(tmp, "filsystem") != 0)
 		{
@@ -154,34 +154,34 @@ int main()
 			printf("%s>", tmp2[i].com);
 		}
 		string temp_cmd;
-		cin >> temp_cmd;							//ÊäÈëÃüÁî²¢ÇÒ²éÕÒÃüÁîµÄÏà¹Ø²Ù×÷
+		cin >> temp_cmd;							//è¾“å…¥å‘½ä»¤å¹¶ä¸”æŸ¥æ‰¾å‘½ä»¤çš„ç›¸å…³æ“ä½œ
 		p = find_cmd(temp_cmd, 0, CMD_NUM, cmd);
-		read_file(fp);								//¶ÁÈ¡ÏµÍ³ÎÄ¼şµÄÄÚÈİ
+		read_file(fp);								//è¯»å–ç³»ç»Ÿæ–‡ä»¶çš„å†…å®¹
 		switch (p){
 			case 11: {
-				format();       //³õÊ¼»¯
+				format();       //åˆå§‹åŒ–
 				break;
 			}
 			case 7: {
-				display_curdir();     //²é¿´µ±Ç°Ä¿Â¼ÏÂµÄÎÄ¼şÁĞ±í
+				display_curdir();     //æŸ¥çœ‹å½“å‰ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
 				break;
 			}
 			case 1: {
-				scanf("%s", tmp);     //²é¿´ÎÄ¼ş
+				scanf("%s", tmp);     //æŸ¥çœ‹æ–‡ä»¶
 				show_file(tmp);
 				break;
 			}
 			case 15: {
-				display_sys();      //²é¿´ÏµÍ³ĞÅÏ¢
+				display_sys();      //æŸ¥çœ‹ç³»ç»Ÿä¿¡æ¯
 				break; 
 			}
 			case 16: {
-				scanf("%s", tmp);      //´´½¨Ä¿Â¼
+				scanf("%s", tmp);      //åˆ›å»ºç›®å½•
 				create_dir(tmp);
 				break;
 			}
 			case 25: {
-				scanf("%s", tmp);     //´´½¨ÎÄ¼ş
+				scanf("%s", tmp);     //åˆ›å»ºæ–‡ä»¶
 				scanf("%d", &len);
 				string limit;
 				cin >> limit;
@@ -189,8 +189,8 @@ int main()
 				break; 
 			}
 			case 6: {
-				scanf("%s", tmp);     //É¾³ıÎÄ¼ş
-				for (i = 0; i < ROOT_NUM; i++)     //ÅĞ¶ÏÎÄ¼şÊÇ²»ÊÇÕı¹æÎÄ¼ş
+				scanf("%s", tmp);     //åˆ é™¤æ–‡ä»¶
+				for (i = 0; i < ROOT_NUM; i++)     //åˆ¤æ–­æ–‡ä»¶æ˜¯ä¸æ˜¯æ­£è§„æ–‡ä»¶
 				{
 					j = root[i].i_num;
 					if (strcmp(tmp, root[i].file_name) == 0 && (i_node[j].file_style) == 1)
@@ -201,22 +201,22 @@ int main()
 				}
 				if (i == ROOT_NUM)
 				{
-					printf("Õâ¸ö²»ÊÇÕı¹æÎÄ¼şÎÄ¼ş\n");
+					printf("è¿™ä¸ªä¸æ˜¯æ­£è§„æ–‡ä»¶æ–‡ä»¶\n");
 				}
 				break;
 			}
 			case 21:{
-				scanf("%s", tmp);     //É¾³ıÄ¿Â¼
+				scanf("%s", tmp);     //åˆ é™¤ç›®å½•
 				del_dir(tmp);
 				break;
 			}
 			case 2: {
-				scanf("%s", tmp1);     //½øÈëµ±Ç°Ä¿Â¼ÏÂµÄÖ¸¶¨Ä¿Â¼   Ïàµ±ÓÚ½øÈëÄ¿Â¼  cd  +  Ä¿Â¼Ãû
+				scanf("%s", tmp1);     //è¿›å…¥å½“å‰ç›®å½•ä¸‹çš„æŒ‡å®šç›®å½•   ç›¸å½“äºè¿›å…¥ç›®å½•  cd  +  ç›®å½•å
 				display_dir(tmp1);
 				break;
 			}
 			case 3: {
-				back_dir();       //·µ»ØÉÏÒ»¼¶Ä¿Â¼
+				back_dir();       //è¿”å›ä¸Šä¸€çº§ç›®å½•
 				break;
 			}
 			case 12: {
@@ -225,7 +225,7 @@ int main()
 			}
 			case 8: 
 			{
-				write_file(fp);      //½«´ÅÅÌÀûÓÃĞÅÏ¢Ğ´½øÏµÍ³ÎÄ¼ş£¬ÍË³ö
+				write_file(fp);      //å°†ç£ç›˜åˆ©ç”¨ä¿¡æ¯å†™è¿›ç³»ç»Ÿæ–‡ä»¶ï¼Œé€€å‡º
 				//system("pause");
 				return 0;
 			}
@@ -253,10 +253,10 @@ int main()
 				cin >> choice;
 				if (!is_open(tmp))
 				{
-					cout << "ÎÄ¼şÎ´´ò¿ª»ò²»´æÔÚ." << endl;
+					cout << "æ–‡ä»¶æœªæ‰“å¼€æˆ–ä¸å­˜åœ¨." << endl;
 					break;
 				}
-				cout << "ÔÚÒ»ÕûĞĞÄÚÊäÈë EXITANYWAY Ê±½áÊø"<<endl;
+				cout << "åœ¨ä¸€æ•´è¡Œå†…è¾“å…¥ EXITANYWAY æ—¶ç»“æŸ"<<endl;
 				string writec,temp;
 				getchar();
 				getline(cin, temp);
@@ -279,8 +279,8 @@ int main()
 				file_array_head = 0;
 				while (1) {
 					int log_com;
-					cout << "1------µÇÂ½------1" << endl;
-					cout << "2------×¢²á------2" << endl;
+					cout << "1------ç™»é™†------1" << endl;
+					cout << "2------æ³¨å†Œ------2" << endl;
 					cin >> log_com;
 					switch (log_com) {
 					case 1:login(); break;
@@ -325,7 +325,7 @@ int main()
 				//system("time");
 				SYSTEMTIME sys;
 				GetLocalTime(&sys);
-				printf("\t%4d/%02d/%02d %02d:%02d:%02d.%03d ĞÇÆÚ %1d\n", sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond, sys.wMilliseconds, sys.wDayOfWeek ? sys.wDayOfWeek : 7);
+				printf("\t%4d/%02d/%02d %02d:%02d:%02d.%03d æ˜ŸæœŸ %1d\n", sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond, sys.wMilliseconds, sys.wDayOfWeek ? sys.wDayOfWeek : 7);
 				break;	
 			}
 			case 23:					//rename
@@ -383,7 +383,7 @@ int main()
 				fstream infile(s.c_str(), ios::out);
 				if (infile.bad())
 				{
-					cout << "µ¼³öÎÄ¼şÊ§°Ü¡£" << endl;
+					cout << "å¯¼å‡ºæ–‡ä»¶å¤±è´¥ã€‚" << endl;
 					break;
 				}
 				infile.close();
@@ -403,7 +403,7 @@ int main()
 				fstream infile(s.c_str(), ios::in);
 				if (!infile.is_open())
 				{
-					cout << "µ¼ÈëÎÄ¼şÊ§°Ü¡£" << endl;
+					cout << "å¯¼å…¥æ–‡ä»¶å¤±è´¥ã€‚" << endl;
 					break;
 				}
 				while (getline(infile,temp))
@@ -417,7 +417,7 @@ int main()
 			}
 			default: 
 			{
-				cout << "ÎŞĞ§Ö¸Áî" << endl;
+				cout << "æ— æ•ˆæŒ‡ä»¤" << endl;
 				break;
 			}
 		}

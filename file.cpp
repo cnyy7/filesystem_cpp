@@ -1,24 +1,24 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
 
 #include "filesystem.h"
 
-int style = 1;			//ÎÄ¼şµÄÀàĞÍ
-int file_array_head;	//ÎÄ¼ş±í×éÍ·
-int physic[100];		//ÎÄ¼şµØÖ·»º³åÇø
-string cur_user;		//µ±Ç°ÓÃ»§
-int file_array[8] = { -1,-1,-1,-1,-1,-1,-1,-1 };  //´ò¿ªÎÄ¼ş±í×é
+int style = 1;			//æ–‡ä»¶çš„ç±»å‹
+int file_array_head;	//æ–‡ä»¶è¡¨ç»„å¤´
+int physic[100];		//æ–‡ä»¶åœ°å€ç¼“å†²åŒº
+string cur_user;		//å½“å‰ç”¨æˆ·
+int file_array[8] = { -1,-1,-1,-1,-1,-1,-1,-1 };  //æ‰“å¼€æ–‡ä»¶è¡¨ç»„
 node temp_file;
 string temp_write;
 string copy_temp_write;
 //char cur_dir[10];
 
-/*µ¼³öÎÄ¼ş*/
+/*å¯¼å‡ºæ–‡ä»¶*/
 void export_file(string filename, string source)
 {
 	if (source[source.length()-1]!='/')
@@ -31,7 +31,7 @@ void export_file(string filename, string source)
 	fstream outfile(source.c_str(), ios::out);
 	if (!outfile.is_open())
 	{
-		cout << "µ¼³öÎÄ¼şÊ§°Ü¡£" << endl;
+		cout << "å¯¼å‡ºæ–‡ä»¶å¤±è´¥ã€‚" << endl;
 		return;
 	}
 	char file[20];
@@ -44,7 +44,7 @@ void export_file(string filename, string source)
 	return;
 }
 
-/*µ¼ÈëÎÄ¼ş*/
+/*å¯¼å…¥æ–‡ä»¶*/
 void import_file(string filename,string new_text)
 {
 	char file[20];
@@ -55,35 +55,35 @@ void import_file(string filename,string new_text)
 	close(file);
 }
 
-/*ÒÆ¶¯ÎÄ¼ş*/
+/*ç§»åŠ¨æ–‡ä»¶*/
 void move_file(char filename[20])
 {
 	copy(filename);
 	del_file(filename);
 }
 
-/*´´½¨ÎÄ¼ş*/
+/*åˆ›å»ºæ–‡ä»¶*/
 void create_file(char filename[], int length, int userid, string limit)
 {
 	int i, j;
 	for (i = 0; i<ROOT_NUM; i++)
 	{
-		//ÅĞ¶ÏÖØÃû
+		//åˆ¤æ–­é‡å
 		if (strcmp(filename, root[i].file_name) == 0 && strcmp(cur_dir, root[i].dir_name) == 0)
 		{
-			printf("ÒÑ¾­´æÔÚÍ¬ÃûÎÄ¼ş£¬²»ÔÊĞí½¨Á¢ÖØÃûµÄÎÄ¼ş\n");
+			printf("å·²ç»å­˜åœ¨åŒåæ–‡ä»¶ï¼Œä¸å…è®¸å»ºç«‹é‡åçš„æ–‡ä»¶\n");
 			return;
 		}
 	}
 	for (i = 0; i<ROOT_NUM; i++)
 	{
-		//ÕÒµ½¿ÕÏĞ¿é
+		//æ‰¾åˆ°ç©ºé—²å—
 		if (root[i].i_num == -1)
 		{
 			root[i].i_num = i;
 			strcpy(root[i].file_name, filename);
-			strcpy(root[i].dir_name, cur_dir);  //°Ñµ±Ç°Ä¿Â¼Ãû ¸øĞÂ½¨Á¢µÄÎÄ¼ş
-			i_node[i].file_style = style;//style==0 ËµÃ÷ÎÄ¼şÊÇÄ¿Â¼ÎÄ¼ş
+			strcpy(root[i].dir_name, cur_dir);  //æŠŠå½“å‰ç›®å½•å ç»™æ–°å»ºç«‹çš„æ–‡ä»¶
+			i_node[i].file_style = style;//style==0 è¯´æ˜æ–‡ä»¶æ˜¯ç›®å½•æ–‡ä»¶
 			i_node[i].file_length = length;
 			strcpy(i_node[i].limit , limit.c_str());
 			i_node[i].file_UserId = userid; 
@@ -93,13 +93,13 @@ void create_file(char filename[], int length, int userid, string limit)
 				i_node[i].file_address[j] = physic[j];
 			}
 
-			//³õÊ¼»¯ÎÄ¼ş
+			//åˆå§‹åŒ–æ–‡ä»¶
 			for (int add = 0; add < 100; add++)
 				for (int c = 0; c < length; c++) {
 					memory[i_node[root[i].i_num].file_address[add]].content[c] = '\0';
 				}
 			int u;
-			for (u = 0; u<100; u++)//·ÖÅäÍêÇå¿Õ»º³åÇø
+			for (u = 0; u<100; u++)//åˆ†é…å®Œæ¸…ç©ºç¼“å†²åŒº
 			{
 				physic[u] = -1;
 			}
@@ -108,7 +108,7 @@ void create_file(char filename[], int length, int userid, string limit)
 	}
 }
 
-/*É¾³ıÎÄ¼ş*/
+/*åˆ é™¤æ–‡ä»¶*/
 void del_file(char filename[])     
 {
 	int i, j, k;
@@ -118,7 +118,7 @@ void del_file(char filename[])
 		if ((strcmp(filename, root[i].file_name) == 0) && (strcmp(cur_dir, root[i].dir_name) == 0) && (i_node[root[i].i_num].file_UserId == login_userid))
 		{
 			int add, c;
-			for (add = 0; add<i_node[root[i].i_num].file_length; add++)//ÎÄ¼şÄÚÈİÇå¿Õ
+			for (add = 0; add<i_node[root[i].i_num].file_length; add++)//æ–‡ä»¶å†…å®¹æ¸…ç©º
 			{
 				for (c = 0; memory[i_node[root[i].i_num].file_address[add]].content[c] != '\0'; c++)
 				{
@@ -133,31 +133,31 @@ void del_file(char filename[])
 			{
 				physic[j] = i_node[k].file_address[j];
 			}
-			callback(i_node[k].file_length); //µ÷ÓÃ »ØÊÕº¯Êı
-			int u;//»ØÊÕÍêÇå¿Õ»º´æÇø
+			callback(i_node[k].file_length); //è°ƒç”¨ å›æ”¶å‡½æ•°
+			int u;//å›æ”¶å®Œæ¸…ç©ºç¼“å­˜åŒº
 			for (u = 0; u<100; u++)
 			{
 				physic[u] = -1;
 			}
-			for (j = 0; j<100; j++)     //É¾³ıÎÄ¼şºóÒª½«ÎÄ¼şÊôĞÔºÍÄ¿Â¼ÏîµÄ¸÷¸öÖµ»Ö¸´³õÖµ
+			for (j = 0; j<100; j++)     //åˆ é™¤æ–‡ä»¶åè¦å°†æ–‡ä»¶å±æ€§å’Œç›®å½•é¡¹çš„å„ä¸ªå€¼æ¢å¤åˆå€¼
 			{
-				i_node[k].file_address[j] = -1; //ÎÄ¼şÕ¼ÓÃµÄ¿éºÅµØÖ·»Ö¸´³õÖµ
+				i_node[k].file_address[j] = -1; //æ–‡ä»¶å ç”¨çš„å—å·åœ°å€æ¢å¤åˆå€¼
 			}
-			strcpy(root[i].file_name, "");  //ÎÄ¼şÃû»Ö¸´³õÖµ
-			root[i].i_num = -1;				//Ä¿Â¼ÏîµÄI½áµãĞÅÏ¢»Ö¸´³õÖµ
-			strcpy(root[i].dir_name, "");	//Ä¿Â¼ÏîµÄÎÄ¼şÄ¿Â¼ĞÅÏ¢»Ö¸´³õÖµ
-			i_node[k].file_length = -1;		//ÎÄ¼ş³¤¶È»Ö¸´
-			i_node[k].file_style = -1;		//ÎÄ¼şÀàĞÍ»Ö¸´³õÖµ
+			strcpy(root[i].file_name, "");  //æ–‡ä»¶åæ¢å¤åˆå€¼
+			root[i].i_num = -1;				//ç›®å½•é¡¹çš„Iç»“ç‚¹ä¿¡æ¯æ¢å¤åˆå€¼
+			strcpy(root[i].dir_name, "");	//ç›®å½•é¡¹çš„æ–‡ä»¶ç›®å½•ä¿¡æ¯æ¢å¤åˆå€¼
+			i_node[k].file_length = -1;		//æ–‡ä»¶é•¿åº¦æ¢å¤
+			i_node[k].file_style = -1;		//æ–‡ä»¶ç±»å‹æ¢å¤åˆå€¼
 			break;
 		}
 	}
 	if (i == ROOT_NUM)
 	{
-		printf("µÇÂ¼ÓÃ»§µÄ¸ÃÄ¿Â¼ÏÂ²»´æÔÚÕâ¸öÎÄ¼ş\n");
+		printf("ç™»å½•ç”¨æˆ·çš„è¯¥ç›®å½•ä¸‹ä¸å­˜åœ¨è¿™ä¸ªæ–‡ä»¶\n");
 	}
 }
 
-/*´ò¿ªÎÄ¼ş*/
+/*æ‰“å¼€æ–‡ä»¶*/
 int open(char filename[20])
 {
 	int i;
@@ -172,14 +172,14 @@ int open(char filename[20])
 			}
 			else
 			{
-				printf("´ò¿ªµÄÎÄ¼şÒÑ´ïÉÏÏŞ£¬ÎŞ·¨´ò¿ª±¾ÎÄ¼ş\n");
+				printf("æ‰“å¼€çš„æ–‡ä»¶å·²è¾¾ä¸Šé™ï¼Œæ— æ³•æ‰“å¼€æœ¬æ–‡ä»¶\n");
 			}
 			return root[i].i_num;
 		}
 	}
 	if (i = ROOT_NUM)
 	{
-		printf("ÄúÒª´ò¿ªµÄÎÄ¼ş²»´æÔÚ»ò²»ÊôÓÚ¸ÃÓÃ»§\n");
+		printf("æ‚¨è¦æ‰“å¼€çš„æ–‡ä»¶ä¸å­˜åœ¨æˆ–ä¸å±äºè¯¥ç”¨æˆ·\n");
 	}
 	return 0;
 }
@@ -197,12 +197,12 @@ void attrib_file(char filename[],string new_property)
 	}
 	if (i = ROOT_NUM)
 	{
-		printf("ÄúÒª¸ü¸ÄÊôĞÔµÄÎÄ¼ş²»´æÔÚ»ò²»ÊôÓÚ¸ÃÓÃ»§\n");
+		printf("æ‚¨è¦æ›´æ”¹å±æ€§çš„æ–‡ä»¶ä¸å­˜åœ¨æˆ–ä¸å±äºè¯¥ç”¨æˆ·\n");
 	}
 	return;
 }
 
-/*ÎÄ¼şÖØÃüÃû*/
+/*æ–‡ä»¶é‡å‘½å*/
 bool rename(char filename[20], string new_name)
 {
 	int i, k;
@@ -218,13 +218,13 @@ bool rename(char filename[20], string new_name)
 	}
 	if (i = ROOT_NUM)
 	{
-		printf("Ã»ÓĞÕâ¸öÎÄ¼ş¡£");
+		printf("æ²¡æœ‰è¿™ä¸ªæ–‡ä»¶ã€‚");
 		return false;
 	}
 	return false;
 }
 
-/*ÎÄ¼şÊÇ·ñ´ò¿ª*/
+/*æ–‡ä»¶æ˜¯å¦æ‰“å¼€*/
 bool is_open(char filename[20])
 {
 	int i;
@@ -254,7 +254,7 @@ bool is_open(char filename[20])
 	return false;
 }
 
-/*¹Ø±ÕÎÄ¼ş*/
+/*å…³é—­æ–‡ä»¶*/
 void close(char filename[20])
 {
 	int i;
@@ -278,19 +278,19 @@ void close(char filename[20])
 			}
 			if (j == file_array_head)
 			{
-				printf("ÄúÒª¹Ø±ÕµÄÎÄ¼şÎ´´ò¿ª¹ı£¡\n");
+				printf("æ‚¨è¦å…³é—­çš„æ–‡ä»¶æœªæ‰“å¼€è¿‡ï¼\n");
 			}
 			return;
 		}
 	}
 	if (i = 640)
 	{
-		printf("ÄúÒª¹Ø±ÕµÄÎÄ¼ş²»´æÔÚ»ò²»ÊôÓÚ¸ÃÓÃ»§\n");
+		printf("æ‚¨è¦å…³é—­çš„æ–‡ä»¶ä¸å­˜åœ¨æˆ–ä¸å±äºè¯¥ç”¨æˆ·\n");
 	}
 	return;
 }
 
-/*¶ÁÈ¡ÎÄ¼ş*/
+/*è¯»å–æ–‡ä»¶*/
 int read(char filename[20])
 {
 	int i;
@@ -319,7 +319,7 @@ int read(char filename[20])
 					}
 					else
 					{
-						printf("ÄãÃ»ÓĞÈ¨ÏŞ¶ÁÈ¡ÎÄ¼şÄÚÈİ£¡£¡\n");
+						printf("ä½ æ²¡æœ‰æƒé™è¯»å–æ–‡ä»¶å†…å®¹ï¼ï¼\n");
 						return 1;
 					}
 					return 0;
@@ -327,7 +327,7 @@ int read(char filename[20])
 			}
 			if (j == 8)
 			{
-				printf("\n  ¸ÃÎÄ¼şÎ´´ò¿ª£¬ÇëÏÈ´ò¿ªÎÄ¼şÔÙ½øĞĞ¶ÁĞ´²Ù×÷!!\n");
+				printf("\n  è¯¥æ–‡ä»¶æœªæ‰“å¼€ï¼Œè¯·å…ˆæ‰“å¼€æ–‡ä»¶å†è¿›è¡Œè¯»å†™æ“ä½œ!!\n");
 				return 1;
 			}
 			return 0;
@@ -335,7 +335,7 @@ int read(char filename[20])
 	}
 	if (i == 640)
 	{
-		printf("ÄúÒª¶ÁÈ¡µÄÎÄ¼ş²»´æÔÚ\n");
+		printf("æ‚¨è¦è¯»å–çš„æ–‡ä»¶ä¸å­˜åœ¨\n");
 		return 1;
 	}
 	return 0;
@@ -343,11 +343,11 @@ int read(char filename[20])
 
 void show_file_content() 
 {
-	cout << "ÎÄ¼şÄÚÈİÎª£º";
+	cout << "æ–‡ä»¶å†…å®¹ä¸ºï¼š";
 	cout << temp_write << endl;
 }
 
-/*Ğ´ÈëÎÄ¼ş*/
+/*å†™å…¥æ–‡ä»¶*/
 void write(char filename[20], string writec,int choice)
 {
 	int i;
@@ -409,13 +409,13 @@ void write(char filename[20], string writec,int choice)
 						}
 						if (add == i_node[root[i].i_num].file_length)
 						{
-							printf("\nÎÄ¼ş¿Õ¼äÒÑÂú£¬Ğ´ÈëÊ§°Ü£¡£¡\n");
+							printf("\næ–‡ä»¶ç©ºé—´å·²æ»¡ï¼Œå†™å…¥å¤±è´¥ï¼ï¼\n");
 						}
 						return;
 					}
 					else
 					{
-						printf("ÄãÃ»ÓĞÈ¨ÏŞ½«ÄÚÈİĞ´ÈëÎÄ¼ş£¡£¡\n");
+						printf("ä½ æ²¡æœ‰æƒé™å°†å†…å®¹å†™å…¥æ–‡ä»¶ï¼ï¼\n");
 						return;
 					}
 					return;
@@ -423,19 +423,19 @@ void write(char filename[20], string writec,int choice)
 			}
 			if (j == 8)
 			{
-				printf("\n  ¸ÃÎÄ¼şÎ´´ò¿ª£¬ÇëÏÈ´ò¿ªÎÄ¼şÔÙ½øĞĞ¶ÁĞ´²Ù×÷!!\n");
+				printf("\n  è¯¥æ–‡ä»¶æœªæ‰“å¼€ï¼Œè¯·å…ˆæ‰“å¼€æ–‡ä»¶å†è¿›è¡Œè¯»å†™æ“ä½œ!!\n");
 			}
 			return;
 		}
 	}
 	if (i == ROOT_NUM)
 	{
-		printf("ÄúÒªĞ´ÈëµÄÎÄ¼ş²»´æÔÚ\n");
+		printf("æ‚¨è¦å†™å…¥çš„æ–‡ä»¶ä¸å­˜åœ¨\n");
 	}
 	return;
 }
 
-/*ÏÔÊ¾ÎÄ¼şĞÅÏ¢*/
+/*æ˜¾ç¤ºæ–‡ä»¶ä¿¡æ¯*/
 void show_file(char filename[])
 {
 	int i, j, k;
@@ -445,18 +445,18 @@ void show_file(char filename[])
 		k = root[i].i_num;
 		if (strcmp(filename, root[i].file_name) == 0 && strcmp(cur_dir, root[i].dir_name) == 0 && (i_node[k].file_style == 1))
 		{
-			printf("\t\tÎÄ¼şÃû×Ö\tÎÄ¼şÀàĞÍ\tÎÄ¼ş³¤¶È\t¶ÁÈ¡È¨ÏŞ\tËùÊôÄ¿Â¼\tËùÊôÓÃ»§\n");
-			printf("\t\t  %s\t", root[i].file_name);	//ÎÄ¼şÃû
-			//printf("\t%d\t", i_node[k].file_style);		//ÎÄ¼şµÄÀàĞÍ
-			printf(i_node[k].file_style ? "\tregular  \t" : "\tdirectory\t");		//ÎÄ¼şµÄÀàĞÍ
-			printf("%8d\t", i_node[k].file_length);		//ÎÄ¼şµÄ³¤¶È
+			printf("\t\tæ–‡ä»¶åå­—\tæ–‡ä»¶ç±»å‹\tæ–‡ä»¶é•¿åº¦\tè¯»å–æƒé™\tæ‰€å±ç›®å½•\tæ‰€å±ç”¨æˆ·\n");
+			printf("\t\t  %s\t", root[i].file_name);	//æ–‡ä»¶å
+			//printf("\t%d\t", i_node[k].file_style);		//æ–‡ä»¶çš„ç±»å‹
+			printf(i_node[k].file_style ? "\tregular  \t" : "\tdirectory\t");		//æ–‡ä»¶çš„ç±»å‹
+			printf("%8d\t", i_node[k].file_length);		//æ–‡ä»¶çš„é•¿åº¦
 			cout << i_node[k].limit << "\t\t";
-			printf("%8s\t", root[i].dir_name);			//ÎÄ¼şËùÔÚµÄÄ¿Â¼
+			printf("%8s\t", root[i].dir_name);			//æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•
 			cout << cur_user << endl;
-			printf("\t\tÎÄ¼şÕ¼ÓÃµÄÎïÀíµØÖ·\n\t\t");
-			for (j = 0; j<i_node[k].file_length; j++)   //ÏÔÊ¾ÎïÀíµØÖ·
+			printf("\t\tæ–‡ä»¶å ç”¨çš„ç‰©ç†åœ°å€\n\t\t");
+			for (j = 0; j<i_node[k].file_length; j++)   //æ˜¾ç¤ºç‰©ç†åœ°å€
 			{
-				printf("%d  ", i_node[k].file_address[j]); //ÎÄ¼ş¾ßÌåÕ¼ÓÃµÄÅÌ¿éºÅ
+				printf("%d  ", i_node[k].file_address[j]); //æ–‡ä»¶å…·ä½“å ç”¨çš„ç›˜å—å·
 			}
 			printf("\n");
 			break;
@@ -464,11 +464,11 @@ void show_file(char filename[])
 	}
 	if (i == ROOT_NUM)
 	{
-		printf("Ã»ÓĞÕâ¸öÎÄ¼ş »òÕßÕâ¸öÎÄ¼ş²»ÊÇÕı¹æÎÄ¼ş\n");
+		printf("æ²¡æœ‰è¿™ä¸ªæ–‡ä»¶ æˆ–è€…è¿™ä¸ªæ–‡ä»¶ä¸æ˜¯æ­£è§„æ–‡ä»¶\n");
 	}
 }
 
-/*¸´ÖÆÎÄ¼ş*/
+/*å¤åˆ¶æ–‡ä»¶*/
 void copy(char filename[20]) 
 {
 	int i;
@@ -483,7 +483,7 @@ void copy(char filename[20])
 	}
 }
 
-/*Õ³Ìù*/
+/*ç²˜è´´*/
 void paste(char filename[20])
 {
 	create_file(filename, temp_file.file_length, login_userid, temp_file.limit);

@@ -1,34 +1,34 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
 
 #include "filesystem.h"
 
-user user_array[USER_NUM];			//ÓÃ»§×é
-int login_userid = -1;		//µÇÂ½ÓÃ»§ID
-int user_num = 0;			//ÓÃ»§×ÜÊı
+user user_array[USER_NUM];			//ç”¨æˆ·ç»„
+int login_userid = -1;		//ç™»é™†ç”¨æˆ·ID
+int user_num = 0;			//ç”¨æˆ·æ€»æ•°
 
-/*×¢²á*/
+/*æ³¨å†Œ*/
 void reg(){
 	string tempusername;
 	string temppassword;
 	if (user_num<USER_NUM+1)
 	{
-		cout << "-----×¢²á-----" << endl;
+		cout << "-----æ³¨å†Œ-----" << endl;
 		while (1) {
-			cout << "ÓÃ»§Ãû£º";
+			cout << "ç”¨æˆ·åï¼š";
 			cin >> tempusername;
 			int i;
 			
-			//ÅĞ¶ÏÊÇ·ñÖØÃû
+			//åˆ¤æ–­æ˜¯å¦é‡å
 			for (i = 0; i<user_num; i++)
 			{
 				if (user_array[i].username == tempusername) {
-					cout << "ÓÃ»§ÃûÒÑ´æÔÚ" << endl;
+					cout << "ç”¨æˆ·åå·²å­˜åœ¨" << endl;
 					break;
 				}
 			}
@@ -36,28 +36,28 @@ void reg(){
 				break;
 		}
 		strcpy(user_array[user_num].username , tempusername.c_str());
-		cout << "ÃÜÂë£º";
+		cout << "å¯†ç ï¼š";
 		cin >> temppassword;
 		strcpy(user_array[user_num].password , temppassword.c_str());
 		user_num++;
 	}
 	else {
-		cout << "×¢²áÊıÒÑÂú" << endl;
+		cout << "æ³¨å†Œæ•°å·²æ»¡" << endl;
 	}
 }
 
-/*µÇÂ½*/
+/*ç™»é™†*/
 int login() {
-	cout << "-----µÇÂ½-----" << endl;
+	cout << "-----ç™»é™†-----" << endl;
 	string  getusername;
 	string  getpassword;
-	cout << "ÓÃ»§Ãû£º";
+	cout << "ç”¨æˆ·åï¼š";
 	cin >> getusername;
-	cout << "ÃÜÂë£º";
+	cout << "å¯†ç ï¼š";
 	cin >> getpassword;
 	int i;
 	if (user_num == 0) {
-		cout << "ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·" << endl;
+		cout << "ç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®" << endl;
 		return 0;
 	}
 	else {
@@ -65,19 +65,19 @@ int login() {
 			if (getusername == user_array[i].username && getpassword == user_array[i].password) {
 				login_userid = i;
 				cur_user = getusername;
-				cout << "µÇÂ½³É¹¦" << endl;
+				cout << "ç™»é™†æˆåŠŸ" << endl;
 				return 1;
 			}
 			else {
 				continue;
 			}
 		}	
-		cout << "ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·" << endl;
+		cout << "ç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®" << endl;
 		return 0;
 	}
 }
 
-/*ÍË³ö*/
+/*é€€å‡º*/
 void logout(){
 	cur_user = "";
 	login_userid = -1;

@@ -1,24 +1,24 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
 
 #include "filesystem.h"
 
-block_super super_block;		//³¬¼¶¿é
-block memory[MEMORY_NUM];			//ÅÌ¿é
+block_super super_block;		//è¶…çº§å—
+block memory[MEMORY_NUM];			//ç›˜å—
 
-/*ÏÔÊ¾ÏµÍ³ĞÅÏ¢*/
+/*æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯*/
 void ver_info()
 {
 	cout << "\tCreated by chennan on 6 June." << endl;
 
 }
 
-/*½«ĞÅÏ¢Ğ´ÈëÏµÍ³ÎÄ¼ş*/
+/*å°†ä¿¡æ¯å†™å…¥ç³»ç»Ÿæ–‡ä»¶*/
 void write_file(FILE *fp)    {
 	int i;
 	fp = fopen("filesave", "wb");
@@ -45,7 +45,7 @@ void write_file(FILE *fp)    {
 	fclose(fp);
 }
 
-/*¶Á³öÏµÍ³ÎÄ¼şµÄĞÅÏ¢*/
+/*è¯»å‡ºç³»ç»Ÿæ–‡ä»¶çš„ä¿¡æ¯*/
 void read_file(FILE *fp)   {
 	int i;
 	fp = fopen("filesave", "rb");
@@ -74,7 +74,7 @@ void read_file(FILE *fp)   {
 	fclose(fp);
 }
 
-/*ÏÔÊ¾ÏµÍ³ĞÅÏ¢£¨´ÅÅÌÊ¹ÓÃÇé¿ö£©*/
+/*æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯ï¼ˆç£ç›˜ä½¿ç”¨æƒ…å†µï¼‰*/
 void display_sys(){
 	int i, m, k = 0;
 	for (i = 0; i<MEMORY_NUM; i++)
@@ -83,43 +83,43 @@ void display_sys(){
 			k++;
 	}
 	m = MEMORY_NUM - k;
-	printf("¿ÕÏĞµÄÅÌ¿éÊıÊÇ£º\t");
+	printf("ç©ºé—²çš„ç›˜å—æ•°æ˜¯ï¼š\t");
 	printf("%d\n", k);
-	printf("Ê¹ÓÃµÄÅÌ¿éÊıÊÇ£º\t");
+	printf("ä½¿ç”¨çš„ç›˜å—æ•°æ˜¯ï¼š\t");
 	printf("%d\n", m);
 }
 
-/*¸ñÊ½»¯*/
+/*æ ¼å¼åŒ–*/
 void format()     {
 	int i, j, k;
 	super_block.n = 50;
-	for (i = 0; i<50; i++)     //³¬¼¶¿é³õÊ¼»¯
+	for (i = 0; i<50; i++)     //è¶…çº§å—åˆå§‹åŒ–
 	{
-		super_block.free[i] = i;   //´æ·Å½øÈëÕ»ÖĞµÄ¿ÕÏĞ¿é
-								   //super_block.stack[i]=50+i;  //´æ·ÅÏÂÒ»×éµÄÅÌ¿é
+		super_block.free[i] = i;   //å­˜æ”¾è¿›å…¥æ ˆä¸­çš„ç©ºé—²å—
+								   //super_block.stack[i]=50+i;  //å­˜æ”¾ä¸‹ä¸€ç»„çš„ç›˜å—
 	}
 
-	for (i = 0; i<I_NODE_NUM; i++)     //i½áµãĞÅÏ¢³õÊ¼»¯
+	for (i = 0; i<I_NODE_NUM; i++)     //iç»“ç‚¹ä¿¡æ¯åˆå§‹åŒ–
 	{
 		for (j = 0; j<100; j++)
 		{
-			i_node[i].file_address[j] = -1;//ÎÄ¼şµØÖ·
+			i_node[i].file_address[j] = -1;//æ–‡ä»¶åœ°å€
 		}
 		strcpy(i_node[i].limit ,"");
-		i_node[i].file_length = -1;  //ÎÄ¼ş³¤¶È
-		i_node[i].file_style = -1; //ÎÄ¼şÀàĞÍ
-		i_node[i].file_UserId = -1;//ÓÃ»§ID
+		i_node[i].file_length = -1;  //æ–‡ä»¶é•¿åº¦
+		i_node[i].file_style = -1; //æ–‡ä»¶ç±»å‹
+		i_node[i].file_UserId = -1;//ç”¨æˆ·ID
 	}
 
-	for (i = 0; i<ROOT_NUM; i++)     //Ä¿Â¼ÏîĞÅÏ¢³õÊ¼»¯
+	for (i = 0; i<ROOT_NUM; i++)     //ç›®å½•é¡¹ä¿¡æ¯åˆå§‹åŒ–
 	{
 		strcpy(root[i].file_name, "");
 		root[i].i_num = -1;
 		strcpy(root[i].dir_name, "");
 	}
-	for (i = 0; i<MEMORY_NUM; i++)     //´æ´¢¿Õ¼ä³õÊ¼»¯
+	for (i = 0; i<MEMORY_NUM; i++)     //å­˜å‚¨ç©ºé—´åˆå§‹åŒ–
 	{
-		memory[i].n = 0;      //±ØĞëÓĞÕâ¸ö
+		memory[i].n = 0;      //å¿…é¡»æœ‰è¿™ä¸ª
 		memory[i].a = 0;
 		for (j = 0; j<50; j++)
 		{
@@ -133,8 +133,8 @@ void format()     {
 		}
 
 	}
-	for (i = 0; i<MEMORY_NUM; i++)    //½«¿ÕÏĞ¿éµÄĞÅÏ¢ÓÃ³É×éÁ´½ÓµÄ·½·¨Ğ´½øÃ¿×éµÄ×îºóÒ»¸ö¿éÖĞ
-	{         //´æ´¢¿Õ¼ä³õÊ¼»¯
+	for (i = 0; i<MEMORY_NUM; i++)    //å°†ç©ºé—²å—çš„ä¿¡æ¯ç”¨æˆç»„é“¾æ¥çš„æ–¹æ³•å†™è¿›æ¯ç»„çš„æœ€åä¸€ä¸ªå—ä¸­
+	{         //å­˜å‚¨ç©ºé—´åˆå§‹åŒ–
 
 		if ((i + 1) % 50 == 0)
 		{
@@ -143,8 +143,8 @@ void format()     {
 			{
 				if (k<MEMORY_NUM + 1)
 				{
-					memory[i].free[j] = k;//ÏÂÒ»×é¿ÕÏĞµØÖ·
-					memory[i].n++;  //ÏÂÒ»×é¿ÕÏĞ¸öÊı   ×¢ÒâÔÚmemory[i].n++Ö®Ç°Òª¸øÆä¸³³õÖµ
+					memory[i].free[j] = k;//ä¸‹ä¸€ç»„ç©ºé—²åœ°å€
+					memory[i].n++;  //ä¸‹ä¸€ç»„ç©ºé—²ä¸ªæ•°   æ³¨æ„åœ¨memory[i].n++ä¹‹å‰è¦ç»™å…¶èµ‹åˆå€¼
 					k++;
 				}
 				else
@@ -152,8 +152,8 @@ void format()     {
 					memory[i].free[j] = -1;
 				}
 			}
-			memory[i].a = 0;    //±ê¼ÇÎªÃ»ÓĞÊ¹ÓÃ
-			continue;     //´¦ÀíÍêÓÃÓÚ´æ´¢ÏÂÒ»×éÅÌ¿éĞÅÏ¢µÄÌØÊâÅÌ¿éºó£¬Ìø¹ı±¾´ÎÑ­»·
+			memory[i].a = 0;    //æ ‡è®°ä¸ºæ²¡æœ‰ä½¿ç”¨
+			continue;     //å¤„ç†å®Œç”¨äºå­˜å‚¨ä¸‹ä¸€ç»„ç›˜å—ä¿¡æ¯çš„ç‰¹æ®Šç›˜å—åï¼Œè·³è¿‡æœ¬æ¬¡å¾ªç¯
 		}
 		for (j = 0; j<50; j++)
 		{
@@ -176,37 +176,37 @@ void format()     {
 		strcpy(user_array[k].username , "");
 		strcpy(user_array[k].password , "");
 	}
-	printf("ÒÑ¾­³õÊ¼»¯Íê±Ï\n");
+	printf("å·²ç»åˆå§‹åŒ–å®Œæ¯•\n");
 }
 
-/*·ÖÅä¿Õ¼ä*/
+/*åˆ†é…ç©ºé—´*/
 void allot(int length)     {
 	int i, j, k, m, p;
 	for (i = 0; i<length; i++)
 	{
-		k = 50 - super_block.n;		//³¬¼¶¿éÖĞ±íÊ¾¿ÕÏĞ¿éµÄÖ¸Õë
-		m = super_block.free[k];	//Õ»ÖĞµÄÏàÓ¦ÅÌ¿éµÄµØÖ·
-		p = super_block.free[49];   //Õ»ÖĞµÄ×îºóÒ»¸öÅÌ¿éÖ¸ÏòµÄµØÖ·
-		if (p == -1)				//Ã»ÓĞÊ£ÓàÅÌ¿é
+		k = 50 - super_block.n;		//è¶…çº§å—ä¸­è¡¨ç¤ºç©ºé—²å—çš„æŒ‡é’ˆ
+		m = super_block.free[k];	//æ ˆä¸­çš„ç›¸åº”ç›˜å—çš„åœ°å€
+		p = super_block.free[49];   //æ ˆä¸­çš„æœ€åä¸€ä¸ªç›˜å—æŒ‡å‘çš„åœ°å€
+		if (p == -1)				//æ²¡æœ‰å‰©ä½™ç›˜å—
 		{
-			printf("ÄÚ´æ²»×ã,²»ÄÜ¹»·ÖÅä¿Õ¼ä\n");
-			callback(i);//Ö®Ç°ÒÑ·ÖÅäµÄi¸öÅÌ¿é»ØÊÕ£»
+			printf("å†…å­˜ä¸è¶³,ä¸èƒ½å¤Ÿåˆ†é…ç©ºé—´\n");
+			callback(i);//ä¹‹å‰å·²åˆ†é…çš„iä¸ªç›˜å—å›æ”¶ï¼›
 			break;
 		}
 		if (super_block.n == 1)
 		{
-			memory[m].a = 1;    //½«×îºóÒ»¸öÅÌ¿é·ÖÅäµô
+			memory[m].a = 1;    //å°†æœ€åä¸€ä¸ªç›˜å—åˆ†é…æ‰
 			physic[i] = m;
 			super_block.free[49] = -1;
 			super_block.n = 0;
-			for (j = 50 - memory[m].n; j<50; j++) //´Ó×îºóÒ»¸öÅÌ¿éÖĞÈ¡³öÏÂÒ»×éÅÌ¿éºÅĞ´ÈëÕ»ÖĞ
+			for (j = 50 - memory[m].n; j<50; j++) //ä»æœ€åä¸€ä¸ªç›˜å—ä¸­å–å‡ºä¸‹ä¸€ç»„ç›˜å—å·å†™å…¥æ ˆä¸­
 			{
 				super_block.free[j] = memory[m].free[j];
 				super_block.n++;
 			}
-			continue;     //ÒªÌø¹ıÕâ´ÎÑ­»·£¬ÏÂÃæµÄÓï¾äÔÚIFÖĞÒÑ¾­Ö´ĞĞ¹ı
+			continue;     //è¦è·³è¿‡è¿™æ¬¡å¾ªç¯ï¼Œä¸‹é¢çš„è¯­å¥åœ¨IFä¸­å·²ç»æ‰§è¡Œè¿‡
 		}
-		physic[i] = m;     //Èç¹ûÕ»ÖĞ³¬¹ıÒ»¸öÅÌ£¬Õ»ÖĞµÄÏàÓ¦ÅÌ¿éµÄµØÖ·Ğ´½ø ÎÄ¼şµØÖ·»º³åÇø
+		physic[i] = m;     //å¦‚æœæ ˆä¸­è¶…è¿‡ä¸€ä¸ªç›˜ï¼Œæ ˆä¸­çš„ç›¸åº”ç›˜å—çš„åœ°å€å†™è¿› æ–‡ä»¶åœ°å€ç¼“å†²åŒº
 		memory[m].a = 1;
 		m = -1;
 		super_block.n--;
@@ -214,15 +214,15 @@ void allot(int length)     {
 
 }
 
-/*»ØÊÕ´ÅÅÌ¿Õ¼ä*/
+/*å›æ”¶ç£ç›˜ç©ºé—´*/
 void callback(int length)    {
 	int i, j, k, m, q = 0;
 	for (i = length - 1; i >= 0; i--)
 	{
-		k = physic[i];				//ĞèÒªÌá¹©Òª»ØÊÕµÄÎÄ¼şµÄµØÖ·
-		m = 49 - super_block.n;		//»ØÊÕµ½Õ»ÖĞµÄÄÄ¸öÎ»ÖÃ
-		if (super_block.n == 50)	//×¢Òâ µ±super_block.n==50Ê± m=-1;µÄÖµ
-		{							//super_block.n==50µÄÊ±ºòÕ»ÂúÁË£¬Òª½«Õâ¸öÕ»ÖĞµÄËùÓĞµØÖ·ĞÅÏ¢Ğ´½øÏÂÒ»¸öµØÖ·ÖĞ
+		k = physic[i];				//éœ€è¦æä¾›è¦å›æ”¶çš„æ–‡ä»¶çš„åœ°å€
+		m = 49 - super_block.n;		//å›æ”¶åˆ°æ ˆä¸­çš„å“ªä¸ªä½ç½®
+		if (super_block.n == 50)	//æ³¨æ„ å½“super_block.n==50æ—¶ m=-1;çš„å€¼
+		{							//super_block.n==50çš„æ—¶å€™æ ˆæ»¡äº†ï¼Œè¦å°†è¿™ä¸ªæ ˆä¸­çš„æ‰€æœ‰åœ°å€ä¿¡æ¯å†™è¿›ä¸‹ä¸€ä¸ªåœ°å€ä¸­
 			for (j = 0; j<50; j++)
 			{
 				memory[k].free[j] = super_block.free[j];
@@ -238,9 +238,9 @@ void callback(int length)    {
 		memory[k].a = 0;
 		if (m == -1)
 		{
-			m = 49;      //½«ÏÂÒ»¸öÎÄ¼şµØÖ·ÖĞµÄÅÌ¿éºÅ»ØÊÕµ½Õ»µ×ÖĞ£¬Õâ¸öµØÖ·ÖĞ´æ·Å×Å¸Õ²ÅÂúÕ»µÄµØÖ·µÄĞÅÏ¢
+			m = 49;      //å°†ä¸‹ä¸€ä¸ªæ–‡ä»¶åœ°å€ä¸­çš„ç›˜å—å·å›æ”¶åˆ°æ ˆåº•ä¸­ï¼Œè¿™ä¸ªåœ°å€ä¸­å­˜æ”¾ç€åˆšæ‰æ»¡æ ˆçš„åœ°å€çš„ä¿¡æ¯
 		}
-		super_block.free[m] = physic[i]; //½«ÏÂÒ»¸öÎÄ¼şµØÖ·ÖĞµÄÅÌ¿éºÅ»ØÊÕµ½Õ»ÖĞ
+		super_block.free[m] = physic[i]; //å°†ä¸‹ä¸€ä¸ªæ–‡ä»¶åœ°å€ä¸­çš„ç›˜å—å·å›æ”¶åˆ°æ ˆä¸­
 		super_block.n++;
 	}
 }

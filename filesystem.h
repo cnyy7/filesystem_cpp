@@ -1,7 +1,7 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
@@ -16,106 +16,106 @@ on 6 June.
 #include <windows.h>
 #include <iostream>
 using namespace std;
-#define CMD_NUM 28			//ÃüÁî¸öÊı
-#define MEMORY_NUM 20449	//ÄÚ´æ¿é¸öÊı
-#define I_NODE_NUM 640		//i_node½áµã¸öÊı
-#define ROOT_NUM 640		//Ä¿Â¼¡¢ÎÄ¼ş¸öÊı
-#define USER_NUM 8			//×î´óÓÃ»§Êı
+#define CMD_NUM 28			//å‘½ä»¤ä¸ªæ•°
+#define MEMORY_NUM 20449	//å†…å­˜å—ä¸ªæ•°
+#define I_NODE_NUM 640		//i_nodeç»“ç‚¹ä¸ªæ•°
+#define ROOT_NUM 640		//ç›®å½•ã€æ–‡ä»¶ä¸ªæ•°
+#define USER_NUM 8			//æœ€å¤§ç”¨æˆ·æ•°
 
-//ÃüÁî
+//å‘½ä»¤
 struct command{
 	char com[10];
 };
 
-//ÅÌ¿éĞÅÏ¢£¨1KB/¿é£©
+//ç›˜å—ä¿¡æ¯ï¼ˆ1KB/å—ï¼‰
 struct block
 {
-	int n;				//´æ·Å¿ÕÏĞÅÌ¿éµÄ¸öÊı
-	int free[50];		//´æ·Å¿ÕÏĞÅÌ¿éµÄµØÖ·
-	int a;				//ÅÌ¿éÊÇ·ñ±»Õ¼ÓÃ±êÖ¾
-	char content[1000];	//¿éÉÏÃ¿¸ö×Ö½Ú´æ·ÅµÄ·ûºÅ
+	int n;				//å­˜æ”¾ç©ºé—²ç›˜å—çš„ä¸ªæ•°
+	int free[50];		//å­˜æ”¾ç©ºé—²ç›˜å—çš„åœ°å€
+	int a;				//ç›˜å—æ˜¯å¦è¢«å ç”¨æ ‡å¿—
+	char content[1000];	//å—ä¸Šæ¯ä¸ªå­—èŠ‚å­˜æ”¾çš„ç¬¦å·
 };
 
-//³¬¼¶¿é
+//è¶…çº§å—
 struct block_super{
-	int n;			 //¿ÕÏĞµÄÅÌ¿éµÄ¸öÊı
-	int free[50];    //´æ·Å½øÈëÕ»ÖĞµÄ¿ÕÏĞ¿é					
+	int n;			 //ç©ºé—²çš„ç›˜å—çš„ä¸ªæ•°
+	int free[50];    //å­˜æ”¾è¿›å…¥æ ˆä¸­çš„ç©ºé—²å—					
 };
 
-//i½áµãĞÅÏ¢£¨32B/i½Úµã£©
+//iç»“ç‚¹ä¿¡æ¯ï¼ˆ32B/ièŠ‚ç‚¹ï¼‰
 struct node{
-	int file_style;				 //i½áµã ÎÄ¼şÀàĞÍ
-	int file_length;			 //i½áµã ÎÄ¼ş³¤¶È
-	int file_address[100];		 //ÎÄ¼şÕ¼ÓÃµÄÎïÀí¿éºÅ¡£
-	char limit[20];				 //´ò¿ª¶ÁĞ´È¨ÏŞ£¬0±íÊ¾ÄÜ´ò¿ª¶ÁĞ´£¬1±íÊ¾ÄÜ´ò¿ª¶Á£¬2±íÊ¾ÄÜ´ò¿ªĞ´£¬3±íÊ¾Ö»ÄÜ´ò¿ª
-	int file_UserId;			//ÓÃ»§id
+	int file_style;				 //iç»“ç‚¹ æ–‡ä»¶ç±»å‹
+	int file_length;			 //iç»“ç‚¹ æ–‡ä»¶é•¿åº¦
+	int file_address[100];		 //æ–‡ä»¶å ç”¨çš„ç‰©ç†å—å·ã€‚
+	char limit[20];				 //æ‰“å¼€è¯»å†™æƒé™ï¼Œ0è¡¨ç¤ºèƒ½æ‰“å¼€è¯»å†™ï¼Œ1è¡¨ç¤ºèƒ½æ‰“å¼€è¯»ï¼Œ2è¡¨ç¤ºèƒ½æ‰“å¼€å†™ï¼Œ3è¡¨ç¤ºåªèƒ½æ‰“å¼€
+	int file_UserId;			//ç”¨æˆ·id
 };
 
-//ÓÃ»§ĞÅÏ¢
+//ç”¨æˆ·ä¿¡æ¯
 struct user {
 	char username[20];
 	char password[20];
 } ;
 
-//Ä¿Â¼¡¢ÎÄ¼şÏî
+//ç›®å½•ã€æ–‡ä»¶é¡¹
 struct dir{
-	char file_name[20];		 //ÎÄ¼şÃû
-	int  i_num;				 //ÎÄ¼şµÄ½áµãºÅ
-	char dir_name[20];		 //Ä¿Â¼Ãû»òÕßËµÎÄ¼şËùÔÚÄ¿Â¼
+	char file_name[20];		 //æ–‡ä»¶å
+	int  i_num;				 //æ–‡ä»¶çš„ç»“ç‚¹å·
+	char dir_name[20];		 //ç›®å½•åæˆ–è€…è¯´æ–‡ä»¶æ‰€åœ¨ç›®å½•
 };
 
-extern int user_num;				//ÒÑ×¢²áÓÃ»§ÊıÁ¿
-extern int login_userid;			//µ±Ç°µÇÂ¼µÄÓÃ»§ID
-extern string cur_user;				//µ±Ç°ÓÃ»§
-extern int file_array[8];			// ´ò¿ªÎÄ¼ş±í×é
-extern int file_array_head;			//ÎÄ¼ş±í×éÍ·
-extern int physic[100];				//ÎÄ¼şµØÖ·»º³åÇø
-extern int style;					//ÎÄ¼şµÄÀàĞÍ
-extern char cur_dir[20];			//µ±Ç°Ä¿Â¼
-extern string temp_write;			//ÁÙÊ±ÎÄ¼şÄÚÈİ
-extern string copy_temp_write;			//ÁÙÊ±ÎÄ¼şÄÚÈİ
-extern node temp_file;			//ÁÙÊ±ÎÄ¼ş
+extern int user_num;				//å·²æ³¨å†Œç”¨æˆ·æ•°é‡
+extern int login_userid;			//å½“å‰ç™»å½•çš„ç”¨æˆ·ID
+extern string cur_user;				//å½“å‰ç”¨æˆ·
+extern int file_array[8];			// æ‰“å¼€æ–‡ä»¶è¡¨ç»„
+extern int file_array_head;			//æ–‡ä»¶è¡¨ç»„å¤´
+extern int physic[100];				//æ–‡ä»¶åœ°å€ç¼“å†²åŒº
+extern int style;					//æ–‡ä»¶çš„ç±»å‹
+extern char cur_dir[20];			//å½“å‰ç›®å½•
+extern string temp_write;			//ä¸´æ—¶æ–‡ä»¶å†…å®¹
+extern string copy_temp_write;			//ä¸´æ—¶æ–‡ä»¶å†…å®¹
+extern node temp_file;			//ä¸´æ—¶æ–‡ä»¶
 
 
-extern command cmd[CMD_NUM];		//ÃüÁî
-extern block memory[MEMORY_NUM];	//ÄÚ´æ¿é
-extern block_super super_block;		//³¬¼¶¿é 
-extern node i_node[I_NODE_NUM];		//i_node½áµã
-extern user user_array[USER_NUM];	//ÓÃ»§
-extern dir root[ROOT_NUM];			//ÎÄ¼ş¡¢Ä¿Â¼
+extern command cmd[CMD_NUM];		//å‘½ä»¤
+extern block memory[MEMORY_NUM];	//å†…å­˜å—
+extern block_super super_block;		//è¶…çº§å— 
+extern node i_node[I_NODE_NUM];		//i_nodeç»“ç‚¹
+extern user user_array[USER_NUM];	//ç”¨æˆ·
+extern dir root[ROOT_NUM];			//æ–‡ä»¶ã€ç›®å½•
 
-/*º¯Êı¶¨Òå*/
-extern void export_file(string filename,string newtext);	//µ¼³öÎÄ¼ş
-extern void import_file(string filename,string newtext);	//µ¼ÈëÎÄ¼ş
-extern void move_file(char filename[20]);					//ÒÆ¶¯ÎÄ¼ş
-extern void ver_info();										//ÏÔÊ¾ÏµÍ³ĞÅÏ¢
-extern bool rename(char filename[20],string new_name);		//ÎÄ¼şÖØÃüÃû
-extern bool is_open(char filename[20]);						//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´ò¿ª
-extern void init_cmd(command*);							//ÃüÁî³õÊ¼»¯
-extern int find_cmd(string,int,int,command*);			//·µ»ØÃüÁîÏÂ±ê
-extern void del_dir(char filename[]);					//É¾³ıÄ¿Â¼
-extern void back_dir();									//·µ»ØÉÏÒ»¼¶
-extern void create_dir(char filename[]);				//´´½¨Ä¿Â¼
-extern void display_curdir();							//ÏÔÊ¾µ±Ç°Ä¿Â¼ÏÂµÄÎÄ¼şÁĞ±í
-extern void display_dir(char filename[]);				//½øÈëÖ¸¶¨µÄÄ¿Â¼
-extern void close(char filename[20]);					//¹Ø±ÕÎÄ¼ş
-extern void del_file(char filename[]);					//É¾³ıÎÄ¼ş
-extern int open(char filename[20]);						//´ò¿ªÎÄ¼ş
-extern void copy(char filename[20]);					//¸´ÖÆÎÄ¼ş
-extern void paste(char filename[20]);					//Õ³ÌùÎÄ¼ş
-extern int read(char filename[20]);						//¶ÁÈ¡ÎÄ¼şÄÚÈİ
-extern void show_file_content();						//ÏÔÊ¾ÎÄ¼şÄÚÈİ
-extern void show_file(char filename[]);					//ÏÔÊ¾ÎÄ¼şĞÅÏ¢
-extern void help();										//ÃüÁî°ïÖú
-extern void attrib_file(char filename[],string);		//¸ü¸ÄÎÄ¼şÊôĞÔ
-extern void display_sys();								//ÏÔÊ¾ÏµÍ³ĞÅÏ¢£¨´ÅÅÌÊ¹ÓÃÇé¿ö£©
-extern void read_file(FILE *fp);						//¶Á³öÏµÍ³ÎÄ¼şµÄĞÅÏ¢
-extern void write_file(FILE *fp);						//½«ĞÅÏ¢Ğ´ÈëÏµÍ³ÎÄ¼ş
-extern int login();										//µÇÂ½
-extern void logout();									//µÇ³ö
-extern void reg();										//×¢²á
-extern void format();									//³õÊ¼»¯
-extern void allot(int length);							//·ÖÅä¿Õ¼ä
-extern void callback(int length);						//»ØÊÕ¿Õ¼ä
-extern void write(char filename[20], string writec,int choice);//Ğ´ÈëÎÄ¼ş
-extern void create_file(char filename[], int length, int userid, string limit); //´´½¨ÎÄ¼ş
+/*å‡½æ•°å®šä¹‰*/
+extern void export_file(string filename,string newtext);	//å¯¼å‡ºæ–‡ä»¶
+extern void import_file(string filename,string newtext);	//å¯¼å…¥æ–‡ä»¶
+extern void move_file(char filename[20]);					//ç§»åŠ¨æ–‡ä»¶
+extern void ver_info();										//æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯
+extern bool rename(char filename[20],string new_name);		//æ–‡ä»¶é‡å‘½å
+extern bool is_open(char filename[20]);						//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦æ‰“å¼€
+extern void init_cmd(command*);							//å‘½ä»¤åˆå§‹åŒ–
+extern int find_cmd(string,int,int,command*);			//è¿”å›å‘½ä»¤ä¸‹æ ‡
+extern void del_dir(char filename[]);					//åˆ é™¤ç›®å½•
+extern void back_dir();									//è¿”å›ä¸Šä¸€çº§
+extern void create_dir(char filename[]);				//åˆ›å»ºç›®å½•
+extern void display_curdir();							//æ˜¾ç¤ºå½“å‰ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
+extern void display_dir(char filename[]);				//è¿›å…¥æŒ‡å®šçš„ç›®å½•
+extern void close(char filename[20]);					//å…³é—­æ–‡ä»¶
+extern void del_file(char filename[]);					//åˆ é™¤æ–‡ä»¶
+extern int open(char filename[20]);						//æ‰“å¼€æ–‡ä»¶
+extern void copy(char filename[20]);					//å¤åˆ¶æ–‡ä»¶
+extern void paste(char filename[20]);					//ç²˜è´´æ–‡ä»¶
+extern int read(char filename[20]);						//è¯»å–æ–‡ä»¶å†…å®¹
+extern void show_file_content();						//æ˜¾ç¤ºæ–‡ä»¶å†…å®¹
+extern void show_file(char filename[]);					//æ˜¾ç¤ºæ–‡ä»¶ä¿¡æ¯
+extern void help();										//å‘½ä»¤å¸®åŠ©
+extern void attrib_file(char filename[],string);		//æ›´æ”¹æ–‡ä»¶å±æ€§
+extern void display_sys();								//æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯ï¼ˆç£ç›˜ä½¿ç”¨æƒ…å†µï¼‰
+extern void read_file(FILE *fp);						//è¯»å‡ºç³»ç»Ÿæ–‡ä»¶çš„ä¿¡æ¯
+extern void write_file(FILE *fp);						//å°†ä¿¡æ¯å†™å…¥ç³»ç»Ÿæ–‡ä»¶
+extern int login();										//ç™»é™†
+extern void logout();									//ç™»å‡º
+extern void reg();										//æ³¨å†Œ
+extern void format();									//åˆå§‹åŒ–
+extern void allot(int length);							//åˆ†é…ç©ºé—´
+extern void callback(int length);						//å›æ”¶ç©ºé—´
+extern void write(char filename[20], string writec,int choice);//å†™å…¥æ–‡ä»¶
+extern void create_file(char filename[], int length, int userid, string limit); //åˆ›å»ºæ–‡ä»¶

@@ -1,36 +1,36 @@
 /*
 Created by
 
-¼Æ´´16------³Âéª------161002107
+è®¡åˆ›16------é™ˆæ¥ ------161002107
 
 on 6 June.
 */
 
 #include "filesystem.h"
 
-node i_node[I_NODE_NUM];				//i½Úµã
-dir root[ROOT_NUM];					//ÎÄ¼şËùÔÚ¿é
-char cur_dir[20] = "filsystem";	//µ±Ç°Ä¿Â¼
+node i_node[I_NODE_NUM];				//ièŠ‚ç‚¹
+dir root[ROOT_NUM];					//æ–‡ä»¶æ‰€åœ¨å—
+char cur_dir[20] = "filsystem";	//å½“å‰ç›®å½•
 
-/*ÏÔÊ¾µ±Ç°Ä¿Â¼ÏÂµÄÎÄ¼şÁĞ±í*/
+/*æ˜¾ç¤ºå½“å‰ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨*/
 void display_curdir(){
 	int i, k;
-	cout << "ÓÃ»§Ãû£º" << user_array[login_userid].username << endl;
-	printf("\t\tÎÄ¼şÃû×Ö\tÎÄ¼şÀàĞÍ\tÎÄ¼ş³¤¶È\t ËùÊôÄ¿Â¼\n");
+	cout << "ç”¨æˆ·åï¼š" << user_array[login_userid].username << endl;
+	printf("\t\tæ–‡ä»¶åå­—\tæ–‡ä»¶ç±»å‹\tæ–‡ä»¶é•¿åº¦\t æ‰€å±ç›®å½•\n");
 	for (i = 0; i<ROOT_NUM; i++)
 	{
-		if (strcmp(cur_dir, root[i].dir_name) == 0 && i_node[root[i].i_num].file_UserId == login_userid)   //²éÑ¯ÎÄ¼şÖĞ ËùÔÚÄ¿Â¼ĞÅÏ¢ºÍµ±Ç°Ä¿Â¼ĞÅÏ¢ÏàÍ¬µÄÊı¾İ
+		if (strcmp(cur_dir, root[i].dir_name) == 0 && i_node[root[i].i_num].file_UserId == login_userid)   //æŸ¥è¯¢æ–‡ä»¶ä¸­ æ‰€åœ¨ç›®å½•ä¿¡æ¯å’Œå½“å‰ç›®å½•ä¿¡æ¯ç›¸åŒçš„æ•°æ®
 		{
 			k = root[i].i_num;
-			printf("\t\t%8s  ", root[i].file_name);	//ÎÄ¼şÃû
-			printf(i_node[k].file_style? "\tregular  \t" :"\tdirectory\t");		//ÎÄ¼şµÄÀàĞÍ
-			printf("%8d\t", i_node[k].file_length);		//ÎÄ¼şµÄ³¤¶È
-			printf("%10s\n", root[i].dir_name);			//ÎÄ¼şËùÔÚµÄÄ¿Â¼
+			printf("\t\t%8s  ", root[i].file_name);	//æ–‡ä»¶å
+			printf(i_node[k].file_style? "\tregular  \t" :"\tdirectory\t");		//æ–‡ä»¶çš„ç±»å‹
+			printf("%8d\t", i_node[k].file_length);		//æ–‡ä»¶çš„é•¿åº¦
+			printf("%10s\n", root[i].dir_name);			//æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•
 		}
 	}
 }
 
-/*½øÈëÖ¸¶¨µÄÄ¿Â¼*/
+/*è¿›å…¥æŒ‡å®šçš„ç›®å½•*/
 void display_dir(char filename[])
 {
 	int i, k;
@@ -38,54 +38,54 @@ void display_dir(char filename[])
 	{
 		k = root[i].i_num;     
 		
-		//ÅĞ¶ÏÎÄ¼şÀàĞÍÊÇ²»ÊÇÄ¿Â¼ÀàĞÍ
+		//åˆ¤æ–­æ–‡ä»¶ç±»å‹æ˜¯ä¸æ˜¯ç›®å½•ç±»å‹
 		if ((strcmp(filename, root[i].file_name) == 0) && (i_node[k].file_style == 0) && (i_node[k].file_UserId == login_userid))
 		{
-			strcpy(cur_dir, filename);  //½«Òª½øÈëµÄÖ¸¶¨Ä¿Â¼ÉèÖÃÎªµ±Ç°Ä¿Â¼  ¸³Öµ²»Òª·´ÁËstrcpy(Ä¿µÄ£¬Ô´)
+			strcpy(cur_dir, filename);  //å°†è¦è¿›å…¥çš„æŒ‡å®šç›®å½•è®¾ç½®ä¸ºå½“å‰ç›®å½•  èµ‹å€¼ä¸è¦åäº†strcpy(ç›®çš„ï¼Œæº)
 			return;
 		}
 	}
 	if (i == ROOT_NUM)
 	{
-		printf("µÇÂ¼ÓÃ»§Ã»ÓĞÕâ¸öÄ¿Â¼\n");
+		printf("ç™»å½•ç”¨æˆ·æ²¡æœ‰è¿™ä¸ªç›®å½•\n");
 	}
 }
 
-/*·µ»ØÉÏÒ»¼¶Ä¿Â¼*/
+/*è¿”å›ä¸Šä¸€çº§ç›®å½•*/
 void back_dir(){
 	int  i, k;
-	for (i = 0; i<ROOT_NUM; i++)       //²éÑ¯ºÍµ±Ç°Ä¿Â¼ÃûÏàÍ¬µÄÄ¿Â¼ÎÄ¼şÃû
+	for (i = 0; i<ROOT_NUM; i++)       //æŸ¥è¯¢å’Œå½“å‰ç›®å½•åç›¸åŒçš„ç›®å½•æ–‡ä»¶å
 	{
 		k = root[i].i_num;
 		if (strcmp(cur_dir, root[i].file_name) == 0 && (i_node[k].file_style == 0))
 		{
-			strcpy(cur_dir, root[i].dir_name); //½«²éÑ¯µ½µÄÄ¿Â¼ÎÄ¼şÃû  ËùÔÚµÄÄ¿Â¼¸³Öµ¸øµ±Ç°Ä¿Â¼
+			strcpy(cur_dir, root[i].dir_name); //å°†æŸ¥è¯¢åˆ°çš„ç›®å½•æ–‡ä»¶å  æ‰€åœ¨çš„ç›®å½•èµ‹å€¼ç»™å½“å‰ç›®å½•
 		}
 	}
 }
 
-/*´´½¨Ä¿Â¼*/
+/*åˆ›å»ºç›®å½•*/
 void create_dir(char filename[]){
-	style = 0;         //0´ú±íÎÄ¼şÀàĞÍÊÇÄ¿Â¼ÎÄ¼ş
+	style = 0;         //0ä»£è¡¨æ–‡ä»¶ç±»å‹æ˜¯ç›®å½•æ–‡ä»¶
 	create_file(filename, 4, login_userid, "o+r+w");
-	style = 1;         //ÓÃÍê»Ö¸´³õÖµ
+	style = 1;         //ç”¨å®Œæ¢å¤åˆå€¼
 }
 
 
 
-/*É¾³ıÄ¿Â¼*/
+/*åˆ é™¤ç›®å½•*/
 void del_dir(char filename[]){
 	int i, j, k;
-	for (i = 0; i<ROOT_NUM; i++)       //ÅĞ¶ÏÒªÉ¾³ıµÄÄ¿Â¼ÊÇ²»ÊÇµ±Ç°Ä¿Â¼
+	for (i = 0; i<ROOT_NUM; i++)       //åˆ¤æ–­è¦åˆ é™¤çš„ç›®å½•æ˜¯ä¸æ˜¯å½“å‰ç›®å½•
 	{
-		k = root[i].i_num;      //ÕÒµ½Ä¿Â¼Ãû×Ö
+		k = root[i].i_num;      //æ‰¾åˆ°ç›®å½•åå­—
 		if (strcmp(root[i].file_name, filename) == 0 && strcmp(cur_dir, filename) != 0 && (i_node[k].file_style) == 0)
 		{
 			for (j = 0; j<ROOT_NUM; j++)
 			{
 				if (strcmp(filename, root[j].dir_name) == 0)
 				{
-					printf("Ä¿Â¼²»Îª¿Õ²»ÄÜÖ±½ÓÉ¾³ı\n");
+					printf("ç›®å½•ä¸ä¸ºç©ºä¸èƒ½ç›´æ¥åˆ é™¤\n");
 					return;
 				}
 			}
@@ -99,6 +99,6 @@ void del_dir(char filename[]){
 	}
 	if (i == ROOT_NUM)
 	{
-		printf("Õâ¸ö²»ÊÇÄ¿Â¼ÎÄ¼ş »òÕßÒÑµÇÂ¼ÓÃ»§²»´æÔÚÕâ¸öÄ¿Â¼,»òÕßÄãÒªÉ¾³ıµÄÊÇµ±Ç°Ä¿Â¼\n");
+		printf("è¿™ä¸ªä¸æ˜¯ç›®å½•æ–‡ä»¶ æˆ–è€…å·²ç™»å½•ç”¨æˆ·ä¸å­˜åœ¨è¿™ä¸ªç›®å½•,æˆ–è€…ä½ è¦åˆ é™¤çš„æ˜¯å½“å‰ç›®å½•\n");
 	}
 }
